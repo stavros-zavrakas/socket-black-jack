@@ -12,7 +12,13 @@ app.get('/', function (req, res) {
   res.sendFile(__dirname + '/public/index.html');
 });
 
-var black_jack = new Game();
+// Game between 2 and 5 players
+var args = {
+  max_players: getRandomInt(1, 4)
+};
+
+console.log('max players: ' + args.max_players);
+var black_jack = new Game(args);
 
 io.on('connection', function (socket) {
 
