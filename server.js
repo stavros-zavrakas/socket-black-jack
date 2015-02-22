@@ -17,7 +17,7 @@ var args = {
   max_players: getRandomInt(1, 4)
 };
 
-console.log('max players: ' + args.max_players);
+console.log('max players: ' + (args.max_players+1));
 var black_jack = new Game(args);
 
 io.on('connection', function (socket) {
