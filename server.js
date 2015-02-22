@@ -67,7 +67,6 @@ io.on('connection', function (socket) {
               black_jack.updatePlayerCards(players[i].name, cards.c1);
               black_jack.updatePlayerCards(players[i].name, cards.c2);
 
-              console.log('=========================');
               console.log(players[i].name);
               console.log(cards.c1, cards.c2);
               console.log('=========================');
