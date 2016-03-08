@@ -6,8 +6,8 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-var Game = require('./game');
-var utils = require('./utils');
+var Engine = require('./engine');
+var libs = require('./libs');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -30,12 +30,10 @@ app.get('/game', function (req, res, next) {
 });
 
 // // Game between 2 and 5 players
-// var args = {
-//   max_players: utils.getRandomInt(1, 4)
-// };
+// var args max_players: libs.getRandomInt(1, 4);
 
-// console.log('max players: ' + (args.max_players+1));
-// var black_jack = new Game(args);
+// console.log('max players: ' + (max_players+1));
+// var black_jack = new Engine(false, max_players);
 
 // io.on('connection', function (socket) {
 
@@ -84,8 +82,8 @@ app.get('/game', function (req, res, next) {
 
 //               cards.pName = players[i].name;
 //               cards.dealerCards = 2;
-//               cards.c1 = utils.getCard(black_jack.deck);
-//               cards.c2 = utils.getCard(black_jack.deck);
+//               cards.c1 = libs.getCard(black_jack.deck);
+//               cards.c2 = libs.getCard(black_jack.deck);
 
 //               // Update player cards
 //               black_jack.updatePlayerCards(players[i].name, cards.c1);
@@ -119,7 +117,7 @@ app.get('/game', function (req, res, next) {
 //   socket.on('action', function (data, callback) {
 //     if (socket.id === black_jack.turn.socket.id) {
 //       if (data.action === 'get_card') {
-//         var card = utils.getCard(black_jack.deck);
+//         var card = libs.getCard(black_jack.deck);
 //         black_jack.updatePlayerCards(black_jack.turn.name, card);
 
 //         var notification = {
@@ -157,7 +155,7 @@ app.get('/game', function (req, res, next) {
 //           // @todo: ceate something smart of the 'game' of the dealer.
 //           black_jack.turn = players['dealer'];
 
-//           var card = utils.getCard(black_jack.deck);
+//           var card = libs.getCard(black_jack.deck);
 //           black_jack.updatePlayerCards(black_jack.turn.name, card);
 
 //           notification = {
