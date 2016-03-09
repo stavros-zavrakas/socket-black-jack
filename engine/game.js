@@ -1,70 +1,48 @@
-// The deck array contains 52 integers:
-// 1-13 = 1-13 Hearts
-// 14-26 = 1-13 Diamonds
-// 27-39 = 1-13 Clubs
-// 40-52 = 1-13 Spades
+function Game(gameStarted, maxPlayers) {
+  this.turn = null;
 
-function Game(started, max_players) {
-  // Convention: Empty turnsList array below, means that only the delaer is on the game. 
-  this.players_size = 0;
-  this.turn = false;
-  this.turnsList = [];
-  this.deck = Array.apply(null, Array(52)).map(function (x, i) {
-    return i + 1
-  });
+  this.gameStarted = gameStarted || false;
+  this.minPlayers = 2; // Dealer and at least one player
+  this.maxPlayers = maxPlayers && maxPlayers > 1 ? maxPlayers : 2;
 
-  this.started = started || false;
-  this.max_players = max_players || 1;
-
-  this.players = {
-    names: [],
-    dealer: {
-      name: 'dealer',
-      socket: null, // It means that we need to broadcast to everybody
-      cards: [],
-      sum: 0
-    }
-  };
+  this.guests = {};
+  this.players = {};
 };
 
 Game.prototype = {
-  initPlayer: function (player_name, socket) {
-    // @todo: maybe checking the indexOf players.names array?
-    if (typeof this.players[player_name] !== 'undefined') {
+  // @todo: how should we handle that this username already joined as guest?
+  guestJoined: function (player) {
+    var username = player.getUsername();
+
+    if (this.guests[username]) {
+      return;
+    }
+
+    this.guests[username] = player;
+  },
+  join: function (player) {
+    var username = player.getUsername();
+
+    if (this.players[username]) {
       return false;
     }
 
-    this.players.names.push(player_name);
-    this.players[player_name] = {
-      name: player_name,
-      socket: socket,
-      cards: [],
-      sum: 0
-    };
-
-    return true;
-  },
-  updatePlayerCards: function (player_name, card) {
-    // @todo: check if the players_name exists in the object
-    this.players[player_name].cards.push(card);
+    this.players[username] = player;
   },
   getPlayers: function () {
     return this.players;
   },
-  getPlayerNames: function () {
-    return this.players.names;
+  getGameStarted: function () {
+    return this.gameStarted;
   },
-  getStarted: function () {
-    return this.started;
-  },
-  setStarted: function (started_over) {
-    this.started = started_over;
+  setGameStarted: function (started) {
+    this.gameStarted = started;
   },
   getMaxPlayers: function () {
-    return this.max_players;
+    return this.maxPlayers;
   },
-  setMaxPlayers: function (max_players_over) {
-    this.max_players = max_players_over;
+  setMaxPlayers: function (maxPlayers) {
+    this.maxPlayers = maxPlayers;
   }
 }
 

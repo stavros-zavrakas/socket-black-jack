@@ -1,90 +1,41 @@
-<div class="row playingCards">
-  <div class="large-8 columns">
-    <div class="row">
-      <div class="large-12 columns">
-        <center><p>Dealer's space</p></center>
-        <div class="row">
-          <div class="large-4 large-centered columns">
-            <div class="dealer left">
-              <div class="name">Dealer</div>
-              <div class="deck">
-                <ul class="hand">
-                </ul>
-                  <!-- 
-                  <div class="card little rank-7 spades">
-                    <span class="rank">7</span>
-                    <span class="suit"><br></span>
-                  </div>
-                  <div class="card little rank-7 spades">
-                    <span class="rank">7</span>
-                    <span class="suit"><br></span>
-                  </div>
-                  <div class="card little rank-7 spades">
-                    <span class="rank">7</span>
-                    <span class="suit"><br></span>
-                  </div>
-                  <div class="card little rank-7 spades">
-                    <span class="rank">7</span>
-                    <span class="suit"><br></span>
-                  </div>
-                   -->
+<div class="row">
 
-              </div>
-            </div>
-            <div class="right">
-              <ul class="deck">
-                  <li><div class="card back">*</div></li>
-                  <li><div class="card back">*</div></li>
-                  <li><div class="card back">*</div></li>
-                  <li><div class="card back">*</div></li>
-                  <li><div class="card back">*</div></li>
-                  <li><div class="card back">*</div></li>
-                  <li><div class="card back">*</div></li>
-                  <li><div class="card back">*</div></li>
-                  <li><div class="card back">*</div></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  <div class="large-8 columns">
+
     <div class="row">
       <div class="large-12 columns">
-        <center><p>Here is the players's space</p></center>
-        <div class="row">
-          <div class="large-12 large-centered columns players">
-            <!-- 
-            <div class="player player1 left">player1</div>
-            <div class="player player2 left">player2</div>
-            <div class="player player3 left">player3</div>
-            <div class="player player4 left">player4</div>
-             -->
-          </div>
-        </div>
+          Dealer
       </div>
     </div>
-    <div class="row player_actions hide">
+
+    <div class="row">
       <div class="large-12 columns">
-        <center><p>Actions</p></center>
-        <a href="#" class="button expand radius" data-action="get_card">Get card</a>
-        <a href="#" class="button expand radius" data-action="change_turn">Stop</a>
+          Players
       </div>
     </div>
+
   </div>
 
   <div class="large-4 columns">
-    <div id="notifications">
-      <h2>Notifications</h2>
-      <br>
-      <form action="">
-        <input type="text" id="username" name="username" autocomplete="off" placeholder="Type your username" />
-        <button class="join button expand radius">Join</button>
-      </form>
-      <ul></ul>
+
+    <div class="row">
+      <div class="large-12 columns">
+        <button class="button radius">Join game!</button>
+      </div>
     </div>
+  
+    <div class="row">
+      <div class="large-12 columns">
+        <button class="button radius hide">Start game!</button>
+      </div>
+    </div>
+  
   </div>
+
 </div>
 
 <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
-<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
-<script src="javascript/main.js"></script>
+<script src="javascript/libs.js"></script>
+<script src="javascript/game/socket.js"></script>
+<script src="javascript/game/domEvents.js"></script>
+
