@@ -23,7 +23,9 @@
       self.socket.on('guest joined callback', function (data) {
         console.log(data.username + ' joined');
       });
-
+    },
+    getSocket: function () {
+      return this.socket;
     }
   };
 

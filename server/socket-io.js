@@ -12,7 +12,7 @@ function init(http) {
   // Attach the connection socket.io event
   io.on('connection', function (socket) {
     console.info('New guest connected (id=' + socket.id + ').');
-    var player;
+    var player = new Player(socket.id, socket);
 
     // guest joined
     socket.on('guest joined', function (username) {
@@ -20,7 +20,7 @@ function init(http) {
         return;
       }
 
-      player = new Player(username, socket);
+      player.setUsername(username);
       gameRoom.guestJoin(player);
 
       // we store the username in the socket session for this client
@@ -31,7 +31,22 @@ function init(http) {
       socket.broadcast.emit('guest joined callback', {
         username: username,
       });
+    });
 
+    // guest joined
+    socket.on('player joined', function (username) {
+      if (gameRoom.isPlayerJoined(username)) {
+        return;
+      }
+
+      gameRoom.playerJoin(player);
+
+      console.info('Player (username=' + username + ') joined the game.');
+
+      // echo globally (all clients) that a person has connected
+      socket.broadcast.emit('player joined callback', {
+        username: username,
+      });
     });
 
     // get card

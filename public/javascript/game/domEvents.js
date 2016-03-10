@@ -6,9 +6,11 @@
 
   bjDomEvents.prototype = {
     bind: function () {
+      var self = this;
 
-      $('form').submit(function () {
-        self.socket.emit('get card', $('#m').val());
+      $('.js-bj-join').click(function () {
+        var socketObj = self.socket.getSocket();
+        socketObj.emit('player joined', self.username);
 
         $('#messages').append($('<li>').text(self.username + ': ' + $('#m').val()));
         $('#m').val('');

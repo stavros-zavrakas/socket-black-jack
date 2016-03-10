@@ -8,7 +8,7 @@
   var bjSocketObj = bjSocket(io, username);
   bjSocketObj.bind();
 
-  bjDomEventsObj = bjDomEvents(bjSocket, username);
+  bjDomEventsObj = bjDomEvents(bjSocketObj, username);
   bjDomEventsObj.bind();
 
 }(io, bjLibs));
