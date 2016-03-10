@@ -17,6 +17,7 @@ function init(http) {
     // guest joined
     socket.on('guest joined', function (username) {
       if (gameRoom.isGuestJoined(username)) {
+        // @todo: give back a response ONLY to the specific user
         return;
       }
 
@@ -27,15 +28,16 @@ function init(http) {
       socket.username = username;
       console.info('New guest joined (username=' + username + ').');
 
-      // echo globally (all clients) that a person has connected
+      // echo globally (all clients) that a guest entered the room
       socket.broadcast.emit('guest joined callback', {
         username: username,
       });
     });
 
-    // guest joined
+    // player joined
     socket.on('player joined', function (username) {
       if (gameRoom.isPlayerJoined(username)) {
+        // @todo: give back a response ONLY to the specific user
         return;
       }
 
@@ -43,7 +45,7 @@ function init(http) {
 
       console.info('Player (username=' + username + ') joined the game.');
 
-      // echo globally (all clients) that a person has connected
+      // echo globally (all clients) that a player joined the game
       socket.broadcast.emit('player joined callback', {
         username: username,
       });
