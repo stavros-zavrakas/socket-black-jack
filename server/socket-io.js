@@ -13,22 +13,19 @@ function init(http) {
   io.on('connection', function (socket) {
     console.info('New guest connected (id=' + socket.id + ').');
     var player;
-    var addedPlayer = false;
 
     // guest joined
     socket.on('guest joined', function (username) {
-      if (addedPlayer) {
+      if (gameRoom.isGuestJoined(username)) {
         return;
       }
 
-      addedPlayer = true;
+      player = new Player(username, socket);
+      gameRoom.guestJoin(player);
 
       // we store the username in the socket session for this client
       socket.username = username;
       console.info('New guest joined (username=' + username + ').');
-
-      player = new Player(username, socket);
-      gameRoom.guestJoined(player);
 
       // echo globally (all clients) that a person has connected
       socket.broadcast.emit('guest joined callback', {
@@ -49,7 +46,7 @@ function init(http) {
 
     // disconnect
     socket.on('disconnect', function () {
-      if (addedPlayer) {
+      if (gameRoom.isGuestJoined(socket.username)) {
         console.log('User disconnected (id=' + socket.id + ' - username=' + socket.username + ').');
       }
     });

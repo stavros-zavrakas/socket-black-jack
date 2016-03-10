@@ -11,7 +11,7 @@ function Game(gameStarted, maxPlayers) {
 
 Game.prototype = {
   // @todo: how should we handle that this username already joined as guest?
-  guestJoined: function (player) {
+  guestJoin: function (player) {
     var username = player.getUsername();
 
     if (this.guests[username]) {
@@ -20,14 +20,20 @@ Game.prototype = {
 
     this.guests[username] = player;
   },
-  join: function (player) {
+  playerJoin: function (player) {
     var username = player.getUsername();
 
     if (this.players[username]) {
-      return false;
+      return;
     }
 
     this.players[username] = player;
+  },
+  isGuestJoined: function (username) {
+    return !!this.guests[username];
+  },
+  isPlayerJoined: function (username) {
+    return !!this.players[username];
   },
   getPlayers: function () {
     return this.players;

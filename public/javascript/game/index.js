@@ -5,7 +5,7 @@
     bjLibs.redirect('/');
   }
 
-  var bjSocketObj = bjSocket(io);
+  var bjSocketObj = bjSocket(io, username);
   bjSocketObj.bind();
 
   bjDomEventsObj = bjDomEvents(bjSocket, username);

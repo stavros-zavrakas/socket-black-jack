@@ -1,7 +1,7 @@
 (function (global, $) {
 
   function bjDomEvents(socket, username) {
-    return bjDomEvents.init(socket, username);
+    return new bjDomEvents.init(socket, username);
   }
 
   bjDomEvents.prototype = {

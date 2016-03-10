@@ -1,4 +1,4 @@
-function Player(username, socket) {
+function Player(username, socket, joined) {
   this.username = username || 'anonymous';
   this.socket = socket;
   this.cards = [];
