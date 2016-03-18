@@ -1,7 +1,7 @@
 var socketIo = require('socket.io');
 
-var Game = require('../../engine/game');
-var Player = require('../../engine/player');
+var Game = require('../engine/game');
+var Player = require('../engine/player');
 
 var bindGuestJoin = require('./guestJoin');
 var bindPlayerJoin = require('./playerJoin');
