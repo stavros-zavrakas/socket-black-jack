@@ -25,7 +25,7 @@ app.get('/game', function (req, res, next) {
   res.render('game');
 });
 
-var socketServer = require('./server/socket-io');
+var socketServer = require('./server/socket/socket-io');
 socketServer.init(http);
 
 http.listen(3000, function () {
