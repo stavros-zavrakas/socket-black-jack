@@ -5,13 +5,17 @@ var exphbs = require('express-handlebars');
 var app = express();
 var http = require('http').Server(app);
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'web/public')));
 
 app.engine('handlebars', exphbs({
+  partialsDir: 'web/views/partials',
+  layoutsDir: 'web/views/layouts',
   defaultLayout: 'main'
 }));
 
 app.set('view engine', 'handlebars');
+
+app.set('views', 'web/views/')
 
 app.get('/', function (req, res) {
   res.render('home');
