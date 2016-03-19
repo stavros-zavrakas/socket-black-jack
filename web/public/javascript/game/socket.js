@@ -1,11 +1,14 @@
 (function (global) {
 
-  function bjSocket (io, username) {
-    return new bjSocket.init(io, username);
+  function bjSocket(io, username) {
+    var self = this;
+
+    self.socket = io();
+    self.username = username;
   }
 
   bjSocket.prototype = {
-    bind: function() {
+    bind: function () {
       var self = this;
 
       self.socket.emit('guest joined', self.username);
@@ -25,18 +28,11 @@
       });
     },
     getSocket: function () {
+      var self = this;
+
       return this.socket;
     }
   };
-
-  bjSocket.init = function (io, username) {
-    var self = this;
-
-    self.socket = io();
-    self.username = username;
-  }
-
-  bjSocket.init.prototype = bjSocket.prototype;
 
   global.bjSocket = bjSocket;
 

@@ -2,7 +2,6 @@
 
   var socket = io();
 
-  bjDomEventsObj = bjDomEvents(bjLibs);
-  bjDomEventsObj.bind();
-
+  bindBjDomEvents(bjLibs);
+  
 }(bjLibs));
